@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>rowskin — ферментированная косметика для HoReCa под вашим брендом</title>
+<meta name="description" content="rowskin — российский бренд ферментированной косметики для отелей, ресторанов и спа. Брендирование под ваш логотип, полный цикл производства." />
+<meta name="theme-color" content="#ECE6D9" />
+<meta property="og:title" content="био-ферментная косметика для отелей" />
+<meta property="og:locale" content="ru_RU" />
+<link rel="icon" href="assets/favicon-r.png?v=2" type="image/png" />
+<link rel="apple-touch-icon" href="assets/favicon-r.png?v=2" />
+<link rel="preload" as="image" href="assets/hero-flowers.webp" fetchpriority="high" />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/CoFoGothic-Regular.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/TTLivretDisplay-Regular.woff2" crossorigin />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <div class="nav-cluster">
+      <nav class="nav" aria-label="Навигация">
+        <a href="#ingredients">состав</a>
+        <a href="#catalog">каталог</a>
+        <a href="#special">спецпроекты</a>
+        <a href="#branding">брендирование</a>
+        <a href="#contacts">контакты</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="Меню" aria-expanded="false"><span></span><span></span></button>
+    </div>
+    <div class="header-right">
+      <a class="brand" href="#top" aria-label="rowskin"><img class="brand-logo" src="assets/rowskin-logo-black.png" alt="rowskin" /></a>
+      <button class="cart-toggle" id="cartToggle" aria-label="Заявка">заявка<span class="cart-count" id="cartCount" data-count="0">0</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav>
+    <a href="#ingredients">состав</a><a href="#catalog">каталог</a>
+    <a href="#special">спецпроекты</a><a href="#branding">брендирование</a><a href="#contacts">контакты</a>
+  </nav>
+</div>
+
+<main>
+
+  <!-- HERO — scroll-morph: r.o.w. ⟷ headline · logo ⟷ animation (image stays) -->
+  <section class="hero" id="hero">
+    <a id="row" class="anchor"></a>
+    <div class="hero-pin">
+      <div class="hero-left">
+        <div class="hero-roll" id="heroRoll">
+          <!-- slide A — r.o.w. -->
+          <div class="hero-slide st-row">
+            <div class="row-list">
+              <div class="bf-item" data-i="r"><h3 class="bf-h">rich</h3><p class="bf-b">обогащённые биоактивными ферментами формулы</p></div>
+              <div class="bf-item" data-i="o"><h3 class="bf-h">organic</h3><p class="bf-b">органические экстракты и этичное производство</p></div>
+              <div class="bf-item" data-i="w"><h3 class="bf-h">wild</h3><p class="bf-b">дикорастущие растения — от Алтая до Камчатки</p></div>
+            </div>
+          </div>
+          <!-- slide B — hero headline -->
+          <div class="hero-slide st-head">
+            <h1 class="hero-title">био-ферментная косметика и аксессуары</h1>
+            <div class="hero-cols">
+              <p class="hero-sub">для отелей, ресторанов и спа</p>
+              <p class="hero-note">с вашим логотипом.</p>
+            </div>
+            <a class="hero-shop" href="#catalog">в каталог →</a>
+          </div>
+        </div>
+      </div>
+      <figure class="hero-media" aria-hidden="true">
+        <img class="hero-img" id="heroImg" src="assets/hero-flowers.webp" alt="" fetchpriority="high" />
+        <img class="hero-img hero-bw" id="ovBw" src="assets/hero-bw.webp" alt="" fetchpriority="low" />
+        <div class="ov-scrim" id="ovScrim"></div>
+        <img class="hero-ov ov-logo" id="ovLogo" src="assets/rowskin-logo-white.png" alt="rowskin" />
+      </figure>
+      <div class="hero-bar">
+        <span class="hero-bar-made">сделано в россии</span>
+        <button class="hero-bar-cta" type="button" data-inquire>обсудить проект →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIVE INGREDIENT — full-bleed feature (delta bg), centered title, right body -->
+  <section class="feature" id="ingredients">
+    <figure class="feature-bg"><img src="assets/ingredient.webp" alt="" data-parallax="0.16" loading="lazy" /></figure>
+    <p class="label feature-label">действующий ингредиент</p>
+    <h2 class="ing-title feature-title">ферментированный корень сибирского ириса</h2>
+    <div class="feature-aside">
+      <p class="ing-body feature-body">Обладает высокой биодоступностью и раскрывает весь потенциал уникального комплекса природных соединений растения. В процессе ферментации крупные молекулы трансформируются в более доступную для кожи форму, обеспечивая глубокое проникновение биоактивных компонентов. Они поддерживают естественный микробиом кожи и укрепляют её резистентность к внешним воздействиям.</p>
+    </div>
+  </section>
+
+  <!-- CATALOG — horizontal best-sellers layout: tabs left, scrolling product row right -->
+  <section class="section catalog-sec" id="catalog">
+    <div class="container catalog-layout">
+      <aside class="catalog-side">
+        <p class="label catalog-label">каталог</p>
+        <div class="filters" id="catalogFilters"></div>
+        <span class="catalog-count" id="catalogCount"></span>
+      </aside>
+      <div class="catalog-main">
+        <div class="product-row" id="productGrid"></div>
+        <div class="catalog-nav">
+          <button class="cat-arrow" id="catPrev" type="button" aria-label="назад">←</button>
+          <button class="cat-arrow" id="catNext" type="button" aria-label="вперёд">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECIAL PROJECTS — full-bleed -->
+  <section class="special-sec" id="special">
+    <div class="media-parallax special-bg"><img src="assets/special-grass.webp" alt="" data-parallax="0.2" loading="lazy" /></div>
+    <div class="container special-card">
+      <p class="label"><span>спецпроекты</span><span class="lat">bespoke</span></p>
+      <h2 class="h2 special-title"><em class="it">комплексная</em> персонализация</h2>
+      <p class="special-body">от дизайна упаковки до авторской парфюмерной композиции</p>
+      <button class="link-arrow" type="button" data-inquire>обсудить проект <span>→</span></button>
+    </div>
+  </section>
+
+  <!-- BRANDING / CONFIGURATOR -->
+  <section class="section branding-sec" id="branding">
+    <div class="container branding-grid">
+      <div class="branding-copy">
+        <p class="label"><span>брендирование</span><span class="lat">white label</span></p>
+        <h2 class="h2"><em class="it">загрузите</em> логотип, чтобы примерить его на флаконах <img class="inline-logo" src="assets/rowskin-logo-black.png" alt="rowskin" /></h2>
+        <div class="config-controls">
+          <label class="upload" id="uploadLabel">
+            <input type="file" id="logoUpload" accept="image/*" hidden />
+            <span class="upload-btn">загрузить логотип</span>
+            <span class="upload-hint">png / svg, лучше на прозрачном фоне — превью появится сразу</span>
+          </label>
+        </div>
+      </div>
+      <div class="branding-stage soft-stage">
+        <div class="config-bottle" id="configBottle">
+          <img class="config-img" src="assets/config-bottle.jpg" alt="rowskin" />
+          <span class="bottle-partner" id="partnerSlot"><span class="partner-placeholder">ваш логотип</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq-sec" id="faq">
+    <div class="container">
+      <p class="label"><span>faq</span></p>
+      <div class="faq" id="faqList"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" id="contacts">
+  <div class="container">
+    <div class="footer-inner">
+      <img class="footer-logo" src="assets/rowskin-logo-black.png" alt="rowskin" />
+      <div class="footer-meta" id="footerContacts"></div>
+      <span class="footer-sig">rich · organic · wild</span>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> ООО «РОУСКИН». Все права защищены.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay" hidden></div>
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true" role="dialog" aria-label="Заявка">
+  <div class="cart-head"><div><p class="label">заявка</p></div><button class="cart-close" id="cartClose" aria-label="Закрыть">✕</button></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-empty" id="cartEmpty">
+    <span class="cart-empty-emblem" data-emblem></span>
+    <p>Пока пусто. Добавьте продукты или соберите образец с вашим брендом.</p>
+    <a class="link-arrow" href="#catalog" data-close-cart>в каталог <span>→</span></a>
+  </div>
+  <div class="cart-foot" id="cartFoot" hidden>
+    <div class="cart-total"><span>ориентир</span><strong id="cartTotal">—</strong></div>
+    <p class="cart-foot-note">предварительно, без учёта тиража и кастомизации</p>
+    <button class="btn btn-block" id="cartCheckout">оформить заявку →</button>
+  </div>
+</aside>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="modalOverlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Оформление заявки">
+    <button class="modal-close" id="modalClose" aria-label="Закрыть">✕</button>
+    <p class="label">оформить заявку</p>
+    <form class="form" id="checkoutForm" novalidate>
+      <div class="form-row">
+        <label class="field"><span>имя *</span><input name="name" required /></label>
+        <label class="field"><span>отель / компания *</span><input name="company" required /></label>
+      </div>
+      <div class="form-row">
+        <label class="field"><span>телефон *</span><input name="phone" type="tel" required /></label>
+        <label class="field"><span>email *</span><input name="email" type="email" required /></label>
+      </div>
+      <label class="field"><span>комментарий</span><textarea name="message" rows="2" placeholder="город, тираж, пожелания"></textarea></label>
+      <div class="form-foot"><button class="btn" type="submit">отправить заявку</button><span class="form-status" id="checkoutStatus" role="status"></span></div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
