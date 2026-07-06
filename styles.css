@@ -220,7 +220,7 @@ svg.footer-logo{height:22px;width:auto;fill:currentColor}
 .special-bg{z-index:0}
 .special-sec::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(236,230,217,.92) 0%,rgba(236,230,217,.62) 40%,rgba(236,230,217,.08) 100%)}
 .special-card{position:relative;z-index:2;max-width:600px}
-.special-card .label{margin-bottom:22px}
+.special-card .label{margin-bottom:22px;color:var(--ink)}
 .special-title{font-style:normal;margin-bottom:18px}
 .special-body{font-size:clamp(16px,1.6vw,20px);line-height:1.6;color:var(--muted);max-width:38ch}
 .special-card .link-arrow{margin-top:clamp(28px,3.5vw,44px)}
