@@ -31,6 +31,14 @@ input,textarea{font:inherit;color:inherit}
 .label{font:500 12px var(--sans);letter-spacing:.02em;text-transform:none;color:var(--muted)}
 .label::before{content:none}
 .lat{display:none}
+/* stylized SVG wordmarks (recolor via currentColor) */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.wm{display:inline-block;fill:currentColor;width:auto;vertical-align:middle}
+.label .wm{height:15px}
+.hero-shop .wm{height:16px}
+.footer-sig{display:inline-flex;align-items:center;gap:15px}
+.footer-sig .wm{height:13px}
+svg.footer-logo{height:22px;width:auto;fill:currentColor}
 .h2{font-family:var(--display);font-weight:400;font-size:clamp(20px,2.2vw,30px);line-height:1.08;letter-spacing:-.018em;color:var(--ink)}
 .inline-logo{height:.64em;width:auto;display:inline-block;vertical-align:baseline;margin-left:.12em;position:relative;top:.03em}
 .it{font-style:normal;color:var(--accent)}
