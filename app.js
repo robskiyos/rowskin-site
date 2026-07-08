@@ -25,6 +25,7 @@ const CONFIG = {
     telegram: "",
     city:     "Москва",
     inn:      "ИНН 9705255766",
+    ogrn:     "ОГРН 1267700146790",
     hours:    "Пн–Пт, 10:00–19:00 МСК"
   },
 
@@ -86,7 +87,7 @@ function renderContacts(){
     <li><span class="c-label">Телефон</span><a href="tel:${tel}">${c.phone}</a></li>
     ${tgLi}
     <li><span class="c-label">Город</span><span class="c-val">${c.city}</span></li>
-    <li><span class="c-label">Реквизиты</span><span class="c-val">${c.inn}</span></li>`;
+    <li><span class="c-label">Реквизиты</span><span class="c-val">${c.inn} · ${c.ogrn}</span></li>`;
   const tgF = c.telegram ? `<a href="https://t.me/${c.telegram}" target="_blank" rel="noopener">Telegram · @${c.telegram}</a>` : "";
   $("#footerContacts").innerHTML = `
     <span class="c-label">Связаться</span>
@@ -94,7 +95,7 @@ function renderContacts(){
     <a href="tel:${tel}">${c.phone}</a>
     ${tgF}
     <span style="opacity:.6;margin-top:.4rem">${c.city} · ${c.hours}</span>
-    <span style="opacity:.5">${c.inn}</span>`;
+    <span style="opacity:.5">${c.inn} · ${c.ogrn}</span>`;
 }
 
 function renderFaq(){
@@ -118,25 +119,43 @@ function renderFaq(){
    ───────────────────────────────────────────────────────── */
 /* каталог делится на две категории: косметика | аксессуары (строчными) */
 const CATS = ["косметика","аксессуары"];
+const SUBCATS = { "косметика":["ателье","основная"] };   // косметика subcategories
 let activeCat="косметика";
+let activeSub="ателье";
+
+function switchProducts(fwd){
+  const row=$("#productGrid");
+  row.classList.remove("enter-below","enter-above");
+  row.classList.add(fwd?"leave-up":"leave-down");
+  setTimeout(()=>{
+    renderProducts();
+    row.classList.remove("leave-up","leave-down");
+    row.classList.add(fwd?"enter-below":"enter-above");
+    row.scrollLeft=0; if(window.__catArrows) window.__catArrows();
+  },300);
+}
 
 function renderFilters(){
-  $("#catalogFilters").innerHTML = CATS.map(c=>
-    `<button class="filter${c===activeCat?' active':''}" data-cat="${c}">${c}</button>`).join("");
+  $("#catalogFilters").innerHTML = CATS.map(c=>{
+    let s = `<button class="filter${c===activeCat?' active':''}" data-cat="${c}">${c}</button>`;
+    if(c===activeCat && SUBCATS[c])
+      s += `<div class="subfilters">`+SUBCATS[c].map(x=>`<button class="subfilter${x===activeSub?' active':''}" data-sub="${x}">${x}</button>`).join("")+`</div>`;
+    return s;
+  }).join("");
   $$("#catalogFilters .filter").forEach(b=>b.addEventListener("click",()=>{
     if(b.dataset.cat===activeCat) return;
     const fwd=b.dataset.cat==="аксессуары";   // косметика→аксессуары = up; back = down
     activeCat=b.dataset.cat;
-    $$("#catalogFilters .filter").forEach(x=>x.classList.toggle("active",x===b));
-    const row=$("#productGrid");
-    row.classList.remove("enter-below","enter-above");
-    row.classList.add(fwd?"leave-up":"leave-down");
-    setTimeout(()=>{
-      renderProducts();
-      row.classList.remove("leave-up","leave-down");
-      row.classList.add(fwd?"enter-below":"enter-above");
-      row.scrollLeft=0; if(window.__catArrows) window.__catArrows();
-    },300);
+    if(activeCat==="косметика") activeSub="ателье";
+    renderFilters();
+    switchProducts(fwd);
+  }));
+  $$("#catalogFilters .subfilter").forEach(b=>b.addEventListener("click",()=>{
+    if(b.dataset.sub===activeSub) return;
+    const fwd=b.dataset.sub==="основная";
+    activeSub=b.dataset.sub;
+    renderFilters();
+    switchProducts(fwd);
   }));
 }
 
@@ -144,9 +163,11 @@ const MIN = { "350":50, "50":350 };   // minimum order quantity per size
 
 function renderProducts(){
   const grid=$("#productGrid"), cc=$("#catalogCount");
-  if(activeCat==="аксессуары"){                     // accessories not available yet
+  const soon = activeCat==="аксессуары" ? "аксессуары появятся позже"
+    : (activeCat==="косметика" && activeSub==="основная") ? "основная линейка появится позже" : null;
+  if(soon){
     grid.classList.add("is-soon");
-    grid.innerHTML = `<div class="catalog-soon"><span class="catalog-soon-h">скоро</span><span class="catalog-soon-sub">аксессуары появятся позже</span></div>`;
+    grid.innerHTML = `<div class="catalog-soon"><span class="catalog-soon-h">скоро</span><span class="catalog-soon-sub">${soon}</span></div>`;
     if(cc) cc.textContent="";
     if(window.__catArrows) window.__catArrows();
     return;
@@ -351,11 +372,12 @@ function readForm(form,type){
 }
 function validate(form){
   let ok=true;
-  $$(".field",form).forEach(fl=>fl.classList.remove("invalid"));
+  $$(".field, .consent",form).forEach(fl=>fl.classList.remove("invalid"));
   $$("[required]",form).forEach(inp=>{
-    let bad=!inp.value.trim();
-    if(!bad && inp.type==="email") bad=!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim());
-    if(bad){inp.closest(".field").classList.add("invalid");ok=false;}
+    let bad;
+    if(inp.type==="checkbox"){ bad=!inp.checked; }
+    else { bad=!inp.value.trim(); if(!bad && inp.type==="email") bad=!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value.trim()); }
+    if(bad){ (inp.closest(".field")||inp.closest(".consent")||inp).classList.add("invalid"); ok=false; }
   });
   return ok;
 }
